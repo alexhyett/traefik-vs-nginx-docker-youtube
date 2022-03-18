@@ -1,0 +1,22 @@
+version: '3.4'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - '80:80'
+    volumes:
+      - "./default.conf:/etc/nginx/conf.d/default.conf"
+
+  whoami:
+    image: 'containous/whoami:latest'
+
+  ghost:
+    image: 'ghost:latest'
+    environment:
+      url: http://localhost/ghost
+
+  ghost2:
+    image: 'ghost:latest'
+    environment:
+      url: http://localhost/ghost2
+

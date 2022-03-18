@@ -1,0 +1,26 @@
+version: '3.4'
+services:
+  traefik:
+    image: 'traefik:latest'
+    ports:
+      - '80:80'
+      - '8080:8080'
+    volumes:
+      - './traefik.yml:/etc/traefik/traefik.yml'
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+
+  whoami:
+    image: 'traefik/whoami'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.whoami.rule=PathPrefix(`/whoami{regex:$$|/.*}`)'
+      - 'traefik.http.services.whoami.loadbalancer.server.port=80'
+
+  ghost:
+    image: 'ghost:latest'
+    environment:
+      url: http://localhost/ghost
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.ghost.rule=PathPrefix(`/ghost{regex:$$|/.*}`)'
+      - 'traefik.http.services.ghost.loadbalancer.server.port=2368'

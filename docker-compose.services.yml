@@ -1,0 +1,25 @@
+version: '3.4'
+services:
+  whoami2:
+    image: 'traefik/whoami'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.whoami2.rule=PathPrefix(`/whoami2{regex:$$|/.*}`)'
+      - 'traefik.http.services.whoami2.loadbalancer.server.port=80'
+    networks:
+      - home
+
+  ghost2:
+    image: 'ghost:latest'
+    environment:
+      url: http://localhost/ghost2
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.ghost2.rule=PathPrefix(`/ghost2{regex:$$|/.*}`)'
+      - 'traefik.http.services.ghost2.loadbalancer.server.port=2368'
+    networks:
+      - home
+
+networks:
+  home:
+    external: true
