@@ -2,7 +2,7 @@
 
 Examples showing how to use Traefik and Nginx for Reverse Proxy.
 
-This repository is to complement my YouTube video on this topic, [Traefik vs nginx: Docker Reverse Proxy](https://www.youtube.com/channel/UCm6lURZOeBVCZ5hJpqlUB-g)
+This repository is to complement my YouTube video on this topic, [Traefik vs nginx: Docker Reverse Proxy](https://youtu.be/rjKe8MhQqFM)
 
 ## nginx
 
